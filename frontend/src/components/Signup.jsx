@@ -122,7 +122,7 @@ const Signup = () => {
 
         try {
             setLoading(true);
-            const res = await axios.post('http://localhost:8080/api/v1/user/register', input, {
+            const res = await axios.post('https://instavibe-1l6d.onrender.com/api/v1/user/register', input, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

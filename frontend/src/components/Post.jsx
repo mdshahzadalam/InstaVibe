@@ -38,7 +38,7 @@ const Post = ({ post }) => {
     const likeOrDislikeHandler = async () => {
         try {
             const action = liked ? 'dislike' : 'like';
-            const res = await axios.get(`http://localhost:8080/api/v1/post/${post._id}/${action}`, {
+            const res = await axios.get(`https://instavibe-1l6d.onrender.com/api/v1/post/${post._id}/${action}`, {
                 withCredentials: true
             });
             console.log(res.data);
@@ -67,7 +67,7 @@ const Post = ({ post }) => {
     const commentHandler = async () => {
 
         try {
-            const res = await axios.post(`http://localhost:8080/api/v1/post/${post._id}/comment`, { text }, {
+            const res = await axios.post(`https://instavibe-1l6d.onrender.com/api/v1/post/${post._id}/comment`, { text }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,7 +96,7 @@ const Post = ({ post }) => {
 
     const deletePostHandler = async () => {
         try {
-            const res = await axios.delete(`http://localhost:8080/api/v1/post/delete/${post?._id}`, {
+            const res = await axios.delete(`https://instavibe-1l6d.onrender.com/api/v1/post/delete/${post?._id}`, {
                 withCredentials: true
             })
             if (res.data.success) {
@@ -114,7 +114,7 @@ const Post = ({ post }) => {
 
     const bookmarkHandler = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/api/v1/post/${post?._id}/bookmark`, {withCredentials:true});
+            const res = await axios.get(`https://instavibe-1l6d.onrender.com/api/v1/post/${post?._id}/bookmark`, {withCredentials:true});
             if(res.data.success){
                 toast.success(res.data.message);
             }

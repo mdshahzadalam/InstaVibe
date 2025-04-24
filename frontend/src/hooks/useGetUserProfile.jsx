@@ -11,7 +11,7 @@ const useGetUserProfile = (userId) => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/api/v1/user/${userId}/profile`, { withCredentials: true });
+                const res = await axios.get(`https://instavibe-1l6d.onrender.com/api/v1/user/${userId}/profile`, { withCredentials: true });
                 if (res.data.success) { 
                     dispatch(setUserProfile(res.data.user));
                 }

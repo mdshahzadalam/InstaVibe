@@ -43,7 +43,8 @@ app.use(urlencoded({ extended: true }));
 // }
 
 const corsOptions = {
-    origin: 'http://localhost:5173',  // Replace with your frontend URL
+    // origin: 'http://localhost:5173',  // Replace with your frontend URL
+    origin: process.env.URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Methods allowed
     allowedHeaders: ['Content-Type', 'Authorization'],  // Add more headers as needed
     credentials: true,  // Allow credentials (cookies, auth headers, etc.)
