@@ -22,12 +22,12 @@ const __dirname = path.resolve();
 // console.log(__dirname);
 
 
-app.get("/", (req, res) => {
-    return res.status(200).json({
-        message: "shahzad alam",
-        success: true
-    })
-})
+// app.get("/", (req, res) => {
+//     return res.status(200).json({
+//         message: "shahzad alam",
+//         success: true
+//     })
+// })
 
 app.use(express.json());
 app.use(cookieParser());

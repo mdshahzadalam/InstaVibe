@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
-import {  Bookmark, Ghost, MessageCircle, MoreHorizontal, Send } from 'lucide-react'
+import { Bookmark, Ghost, MessageCircle, MoreHorizontal, Send } from 'lucide-react'
 import { Button } from './ui/button'
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import CommentDialog from './CommentDialog'
@@ -20,6 +20,9 @@ const Post = ({ post }) => {
     const [liked, setLiked] = useState(post.likes.includes(user?._id) || false);
     const [postLike, setPostLike] = useState(post.likes.length);
     const [comment, setComment] = useState(post.comments);
+
+    const [isExpanded, setIsExpanded] = useState(false);
+
 
     const dispatch = useDispatch();
 
@@ -114,8 +117,8 @@ const Post = ({ post }) => {
 
     const bookmarkHandler = async () => {
         try {
-            const res = await axios.get(`https://instavibe-1l6d.onrender.com/api/v1/post/${post?._id}/bookmark`, {withCredentials:true});
-            if(res.data.success){
+            const res = await axios.get(`https://instavibe-1l6d.onrender.com/api/v1/post/${post?._id}/bookmark`, { withCredentials: true });
+            if (res.data.success) {
                 toast.success(res.data.message);
             }
         } catch (error) {
@@ -145,11 +148,11 @@ const Post = ({ post }) => {
                         {/* <Button variant={Ghost} className='cursor-pointer w-fit text-[#ED4956] font-bold'>Unfollow </Button> */}
 
                         {
-                        post?.author?._id !== user?._id && <Button variant='ghost' className="cursor-pointer w-fit text-[#ED4956] font-bold">Unfollow</Button>
+                            post?.author?._id !== user?._id && <Button variant='ghost' className="cursor-pointer w-fit text-[#ED4956] font-bold">Unfollow</Button>
                         }
-                        
+
                         <Button variant={Ghost} className='cursor-pointer w-fit  '>Add to Favorite </Button>
-                        
+
                         {/* <Button variant={Ghost} className='cursor-pointer w-fit '>Delete </Button> */}
                         {
                             user && user?._id === post?.author._id && <Button onClick={deletePostHandler} variant='ghost' className="cursor-pointer w-fit">Delete</Button>
@@ -163,7 +166,7 @@ const Post = ({ post }) => {
             {/* "https://imgv3.fotor.com/images/gallery/beautiful-machine-girl-with-blue-eyes-created-by-Fotor-ai-art-creator.jpg" */}
 
             <div className='flex items-center justify-between my-2'>
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-3 z-50'>
                     {/* <FaRegHeart onClick={likeOrDislikeHandler} size={'22px'} className='cursor-pointer hover:text-gray-600' /> */}
                     {
                         liked ? <FaHeart onClick={likeOrDislikeHandler} size={'24'} className='cursor-pointer text-red-600' /> : <FaRegHeart onClick={likeOrDislikeHandler} size={'22px'} className='cursor-pointer hover:text-gray-600' />
@@ -178,10 +181,28 @@ const Post = ({ post }) => {
                 <Bookmark onClick={bookmarkHandler} className='cursor-pointer hover:text-gray-600' />
             </div>
             <span className='font-medium block mb-2'>{postLike} likes</span>
-            <p>
+            {/* <p>
                 <span className='font-medium mr-2'>{post.author?.username}</span>
                 {post.caption}
+            </p> */}
+
+            <p className="text-sm text-gray-800 leading-relaxed">
+                <span className="font-semibold mr-2">{post.author?.username}</span>
+                {post.caption.length > 100 ? (
+                    <>
+                        {isExpanded ? post.caption : `${post.caption.slice(0, 100)}...`}
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="ml-1 text-blue-600 text-xs font-semibold"
+                        >
+                            {isExpanded ? 'Show Less' : 'Show More'}
+                        </button>
+                    </>
+                ) : (
+                    post.caption
+                )}
             </p>
+
 
             {
                 comment.length > 0 && (

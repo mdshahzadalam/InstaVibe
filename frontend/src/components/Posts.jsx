@@ -2,6 +2,7 @@ import React from 'react'
 import Post from './Post'
 import { useSelector } from 'react-redux'
 import Banner from './Banner';
+import MyName from './MyName';
 
 
 const Posts = () => {
@@ -9,6 +10,10 @@ const Posts = () => {
     return (
 
         <div >
+
+            <div>
+                <MyName/>
+            </div>
             <div >
                 <Banner />
             </div>

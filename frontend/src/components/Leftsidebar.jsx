@@ -180,7 +180,7 @@ const Leftsidebar = () => {
               const isNotification = Items.text === "Notifications";
               return (
                 <div onClick={() => sidebarHandler(Items.text)} key={index} className='  flex items-center gap-3 relative hover:bg-gray-100 cursor-pointer rounded-lg p-3 my-3'>
-                  {Items.icon}
+                  <span className='block'>{Items.icon}</span>
                   <span className='hidden  lg:inline '>{Items.text}</span>
 
 
